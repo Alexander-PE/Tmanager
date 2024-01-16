@@ -3,7 +3,7 @@ import { Button } from '@/components/ui/button'
 import Logo from '@/components/ui/logo'
 import { OrganizationSwitcher, UserButton } from '@clerk/nextjs'
 
-const Navbar = () => {
+export const Navbar = () => {
   return (
     <div className='fixed z-50 top-0 w-full px-4 h-14 border-b shadow-sm bg-white flex items-center'>
       {/* TODO: mobile sidebar */}
@@ -46,5 +46,3 @@ const Navbar = () => {
     </div>
   )
 }
-
-export default Navbar
