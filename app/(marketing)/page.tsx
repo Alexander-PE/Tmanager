@@ -18,15 +18,15 @@ const bodyFont = Onest({
 const MarketingPage = () => {
   return (
     <div className='flex items-center justify-center flex-col'>
-      <div className={cn('flex items-center justify-center flex-col', headingFont.className,)}>
-        <div className='mb-4 flex items-center border shadow-sm p-4 bg-amber-100 text-amber-700 rounded-full uppercase'>
+      <div className={cn('flex items-center justify-center flex-col pt-10', headingFont.className)}>
+        {/* <div className='mb-4 flex items-center border shadow-sm p-4 bg-amber-100 text-amber-700 rounded-full uppercase'>
           <Medal className='h-6 w-6 mr-2' />
           No.1 task management service
-        </div>
+        </div> */}
         <h1 className='text-3xl md:text-6xl text-center text-neutral-800 mb-6'>
           T-Manager helps team move
         </h1>
-        <div className='text-3xl md:text-6xl bg-gradient-to-r from-fuchsia-600 to-pink-600 text-white px-4 p-2 rounded-md pb-4 w-fit'>
+        <div className='text-3xl md:text-6xl bg-gradient-to-r from-red-600 to-blue-600 text-white px-4 p-2 rounded-md pt-4 w-fit'>
           Work forward
         </div>
       </div>
@@ -35,7 +35,7 @@ const MarketingPage = () => {
       </div>
       <Button className='mt-8' size='lg' asChild>
         <Link href='/sign-up'>
-        Get for free
+          Get for free
         </Link>
       </Button>
     </div>
