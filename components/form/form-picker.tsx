@@ -1,11 +1,12 @@
 'use client'
 
-
 import { useEffect, useState } from "react"
 import { unsplash } from "@/lib/unsplash"
 import { Loader2 } from "lucide-react"
 import { useFormStatus } from "react-dom"
 import { cn } from "@/lib/utils"
+import Image from "next/image"
+import { set } from "zod"
 
 interface FormPickerProps {
   id: string
@@ -22,19 +23,16 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const result = await unsplash.photos.getRandom({
-          collectionIds: ['317099'],
-          count: 9
-        })
+        const result = await unsplash.photos.getRandom({ collectionIds: ['317099'], count: 9 })
 
         if (result && result.response) {
           const newImages = (result.response as Array<Record<string, any>>)
           setImages(newImages)
         } else {
-          console.log('Failed to get images from unsplash')
+          console.error('Failed to get images from unsplash')
         }
       } catch (error) {
-        console.log(error)
+        console.error(error)
         setImages([])
       } finally {
         setLoading(false)
@@ -55,9 +53,18 @@ export const FormPicker = ({ id, errors }: FormPickerProps) => {
   return (
     <div className="relative">
       <div className="grid grid-cols-3 gap-2 mb-2">
-        {images.map(image => (
-          <div className={cn()} >
-
+        {images.map((image) => (
+          <div key={image.id}
+            className={cn(
+              "cursor-pointer relative aspect-video group hover:opacity-75 transition bg-muted",
+              pending && "opacity-50 hover:opacity-50 cursor-auto"
+            )}
+            onClick={() => {
+              if (pending) return
+              setSelectedImageId(image.id)
+            }}
+          >
+            <Image src={image.urls.thumb} alt="unsplash image" className="object-cover rounded-sm" fill />
           </div>
         ))}
       </div>
