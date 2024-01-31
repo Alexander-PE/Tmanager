@@ -6,5 +6,10 @@ export const CreateBoard = z.object({
     invalid_type_error: 'Please enter a valid title'
   }).min(3, {
     message: 'Please enter a title with at least 3 characters'
-  })
+  }),
+  image: z.string({
+    required_error: 'Please select an image',
+    invalid_type_error: 'Please select a valid image'
+  }),
+  
 })
