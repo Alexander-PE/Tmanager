@@ -7,7 +7,6 @@ import { ElementRef, useRef, useState } from 'react';
 import { updateBoard } from '@/actions/updateBoard';
 import { useAction } from '@/hooks/use-action';
 import { toast } from 'sonner';
-import { title } from 'process';
 
 interface BoardTitleFormProps {
   data: Board;
