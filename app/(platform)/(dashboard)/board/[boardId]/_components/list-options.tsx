@@ -12,7 +12,6 @@ import { toast } from "sonner";
 import { ElementRef, useRef } from "react";
 import { copyList } from "@/actions/copyList";
 
-
 interface ListOptionsProps {
   data: List
   onAddCard: () => void

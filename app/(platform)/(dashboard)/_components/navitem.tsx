@@ -32,21 +32,21 @@ export const NavItem = ({ isExpanded, isActive, organization, onExpand }: Props)
       icon: <Layout className="h-4 w-4 mr-2" />,
       href: `/organization/${organization.id}`
     },
-    {
-      label: "Activity",
-      icon: <Activity className="h-4 w-4 mr-2" />,
-      href: `/organization/${organization.id}/activity`
-    },
+    // {
+    //   label: "Activity",
+    //   icon: <Activity className="h-4 w-4 mr-2" />,
+    //   href: `/organization/${organization.id}/activity`
+    // },
     {
       label: "Settings",
       icon: <Settings className="h-4 w-4 mr-2" />,
       href: `/organization/${organization.id}/settings`
     },
-    {
-      label: "Billing",
-      icon: <CreditCard className="h-4 w-4 mr-2" />,
-      href: `/organization/${organization.id}/billing`
-    }
+    // {
+    //   label: "Billing",
+    //   icon: <CreditCard className="h-4 w-4 mr-2" />,
+    //   href: `/organization/${organization.id}/billing`
+    // }
   ]
 
   const onClick = (href: string) => {

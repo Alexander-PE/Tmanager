@@ -11,7 +11,6 @@ import { forwardRef, useRef, ElementRef, KeyboardEventHandler } from "react"
 import { toast } from "sonner"
 import { useEventListener, useOnClickOutside } from "usehooks-ts"
 
-
 interface CardFormProps {
   listId: string
   isEditing: boolean

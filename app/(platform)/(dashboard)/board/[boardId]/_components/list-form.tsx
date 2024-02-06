@@ -12,8 +12,6 @@ import { useAction } from "@/hooks/use-action"
 import { createList } from "@/actions/createList"
 import { toast } from "sonner"
 
-
-
 export const ListForm = () => {
   const router = useRouter()
   const params = useParams()
