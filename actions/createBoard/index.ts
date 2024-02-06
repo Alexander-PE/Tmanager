@@ -6,6 +6,7 @@ import { revalidatePath } from "next/cache"
 import { db } from "@/lib/db"
 import { CreateSafeAction } from "@/lib/create-safe-action"
 import { CreateBoard } from "./schema"
+import { hasAvailableCount, decreaseAvailableCount } from "@/lib/org-limits"
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth()
@@ -16,8 +17,9 @@ const handler = async (data: InputType): Promise<ReturnType> => {
     }
   }
 
+  const canCreate = await hasAvailableCount()
+  if (!canCreate) { return { error: "You have reached the maximum number of boards" } }
   const { title, image } = data
-
   const [imageId, imageThumbUrl, imageFullUrl, imageLinkHTML, imageUserName] = image.split("|")
 
   if (!imageId || !imageThumbUrl || !imageFullUrl || !imageLinkHTML || !imageUserName) {
@@ -40,6 +42,8 @@ const handler = async (data: InputType): Promise<ReturnType> => {
         imageUserName,
       }
     })
+
+    await decreaseAvailableCount()
   } catch (error) {
     return {
       error: "Failed to create board"

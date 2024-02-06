@@ -5,37 +5,33 @@ import { InputType, ReturnType } from "./types"
 import { db } from "@/lib/db"
 import { revalidatePath } from "next/cache"
 import { CreateSafeAction } from "@/lib/create-safe-action"
-import { DeleteBoard } from "./schema"
-import { redirect } from "next/navigation"
-import { incrementAvailableCount } from "@/lib/org-limits"
+import { DeleteCard } from "./schema"
 
 const handler = async (data: InputType): Promise<ReturnType> => {
   const { userId, orgId } = auth()
 
   if (!userId || !orgId) {
     return {
-      error: "You must be logged in to delete a board"
+      error: "You must be logged in to delete a card"
     }
   }
 
-  const { id } = data
-
-  let board
+  const { id, boardId } = data
+  let card
 
   try {
-    board = await db.board.delete({
-      where: { id, orgId }
+    card = await db.card.delete({
+      where: { id, list: { board: { orgId } } }
     })
 
-    await incrementAvailableCount()
   } catch (error) {
     return {
       error: "Failed to delete"
     }
   }
 
-  revalidatePath(`/organization/${orgId}`)
-  redirect(`/organization/${orgId}`)
+  revalidatePath(`/board/${boardId}`)
+  return { data: card }
 }
 
-export const deleteBoard = CreateSafeAction(DeleteBoard, handler)
+export const deleteCard = CreateSafeAction(DeleteCard, handler)
